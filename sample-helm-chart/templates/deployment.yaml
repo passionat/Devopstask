@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-app
+spec:
+  selector:
+    matchLabels:
+      app: app
+  replicas: {{ .Values.replicaCount | default 1 | int }}
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: backend
+        image: likhita347/second-task # build `backend-app` image locally.
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-redis-config
