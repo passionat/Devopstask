@@ -17,4 +17,4 @@ spec:
         image: redis
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 6377
+        - containerPort: 6379
